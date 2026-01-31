@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaFramer - Premium Photo Borders</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- JSZip for batch download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="ph ph-frame-corners"></i>
+                <h1>InstaFramer</h1>
+            </div>
+            <button id="reset-btn" class="secondary-btn" style="display: none;">
+                <i class="ph ph-arrow-counter-clockwise"></i> New Image
+            </button>
+        </header>
+
+        <main>
+            <section class="editor-layout">
+                <!-- Left Side: Canvas / Preview -->
+                <div class="preview-area" id="drop-zone">
+                    <canvas id="photo-canvas"></canvas>
+                    <div class="empty-state" id="empty-state">
+                        <i class="ph ph-upload-simple"></i>
+                        <h3>Drop your photos here</h3>
+                        <p>Supports single or multiple files</p>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*" multiple hidden>
+
+                    <!-- Thumbnails Strip -->
+                    <div class="thumbnails-container" id="thumbnails-container" style="display: none;">
+                        <!-- Thumbnails injected here -->
+                    </div>
+                </div>
+
+                <!-- Right Side: Controls -->
+                <aside class="controls-panel">
+                    <div class="control-group">
+                        <label>Aspect Ratio</label>
+                        <div class="ratio-selector">
+                            <button class="ratio-btn active" data-ratio="1:1">1:1 Square</button>
+                            <button class="ratio-btn" data-ratio="4:5">4:5 Portrait</button>
+                            <button class="ratio-btn" data-ratio="16:9">16:9 Landscape</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Frame Color</label>
+                        <div class="color-picker-wrapper">
+                            <input type="color" id="frame-color" value="#ffffff">
+                            <span id="color-value">#FFFFFF</span>
+                        </div>
+                        <div class="preset-colors">
+                            <button class="color-dot" style="background-color: #ffffff;" data-color="#ffffff"></button>
+                            <button class="color-dot" style="background-color: #000000;" data-color="#000000"></button>
+                            <button class="color-dot" style="background-color: #F5E6D3;" data-color="#F5E6D3"></button>
+                            <!-- Beige -->
+                            <button class="color-dot" style="background-color: #2D2D2D;" data-color="#2D2D2D"></button>
+                            <!-- Dark Grey -->
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label style="display: flex; justify-content: space-between;">
+                            Padding Amount
+                            <span id="padding-val" class="val-display">20%</span>
+                        </label>
+                        <input type="range" id="padding-slider" min="0" max="100" value="20">
+                    </div>
+
+                    <!-- Advanced Toggle -->
+                    <div class="advanced-section">
+                        <button id="advanced-toggle" class="toggle-btn">
+                            <span>Advanced Options</span>
+                            <i class="ph ph-caret-down"></i>
+                        </button>
+                        <div class="advanced-controls" id="advanced-controls">
+                            <div class="control-group">
+                                <label style="display: flex; justify-content: space-between; align-items: center;">
+                                    Background Blur
+                                    <input type="checkbox" id="blur-check" class="toggle-switch">
+                                </label>
+                            </div>
+
+                            <div class="control-group">
+                                <label style="display: flex; justify-content: space-between;">
+                                    Corner Rounding
+                                    <span id="round-val" class="val-display">0%</span>
+                                </label>
+                                <input type="range" id="round-slider" min="0" max="100" value="0">
+                            </div>
+
+                            <div class="control-group">
+                                <label style="display: flex; justify-content: space-between;">
+                                    Drop Shadow
+                                    <span id="shadow-val" class="val-display">0</span>
+                                </label>
+                                <input type="range" id="shadow-slider" min="0" max="100" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button id="download-btn" class="primary-btn" disabled>
+                            <i class="ph ph-download-simple"></i> Download Image
+                        </button>
+                    </div>
+                </aside>
+            </section>
+        </main>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
